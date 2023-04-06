@@ -13,7 +13,7 @@ ver = site.findAll('i')#attrs serve para procurar um atributo no html
 for v in ver:
     nome = v.findAll("span")
     print(nome)
-    city = v.find('span', attrs={'id' : 'ctl2'})
+    city = v.find('span', attrs={'id' : 'ctl2'})        #está dando erro nessa parte devido ao código html não ser regular
     print("¨¨¨¨¨¨")
     print(city)
 
