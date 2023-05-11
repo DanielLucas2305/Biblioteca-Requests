@@ -1,56 +1,63 @@
 from selenium import webdriver
 from time import sleep
+import csv
+import sqlite3
 navegador = webdriver.Chrome()
 
 all = [] #lista vazia
 
-navegador.get("http://200.144.31.45/desaparecidos/default.aspx?filtro=homem")
-
+#Funções para a busca de homens e mulheres
 
 def searchs():
-    q = navegador.maximize_window
     for t in range(238, 248):
-        sleep(1.5)
+        sleep(1)
         nomes = navegador.find_element('xpath', f'//*[@id="ctl{t}_lblNome"]').text
         
         orig = navegador.find_element('xpath', f'//*[@id="ctl{t}_lblCidNasc"]').text
         
         nasc = navegador.find_element('xpath', f'//*[@id="ctl{t}_lblDtNasc"]').text
         print(nomes, orig, nasc)
-        all.append([nomes, orig, nasc][0])
+        all.append([nomes, orig, nasc])
+        sleep(1.3)
 
-# searchs()
 
-# print(all)
-
-pags = navegador.find_element('xpath', '//*[@id="lkBtnIdades"]').click()
+#Inicio da busca no site
+navegador.get("http://200.144.31.45/desaparecidos/default.aspx?")
+pags = navegador.find_element('xpath', '//*[@id="LkBtnPesquisar"]').click()
 sleep(2)
 segpag = navegador.find_element('xpath', '//*[@id="link2"]').click()
-sleep(5)
+sleep(3)
+
+#Loop para busca em todas as páginas de mulheres
 for a in range(1, 139):
     segpag = navegador.find_element('xpath', f'//*[@id="link{a}"]').click()
     searchs()
+    print("-#-"*7,f"Página([{a}]) Abaixo",'-*-'*7)
     print(all)
-    print("-#-"*7,"Próxima Página",'-*-'*7)
+    print("-#-"*7,f"Página([{a}]) Acima",'-*-'*7)
+
+
+#criação do arquivo csv
+with open('DB.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile)
+    writer.writerows(all)
+
+csvfile.close()
 
 
 '''
+#homens
+
 //*[@id="link1"]
 //*[@id="link2"]
 //*[@id="link5"]
 //*[@id="link131"]
 //*[@id="link129"]
 
+#mulheres
+
+//*[@id="link21"]
+
+
 #full XPath
-
-/html/body/form/div[3]/div[2]/div[3]/div[3]/div/div/div/a[3]
-/html/body/form/div[3]/div[2]/div[3]/div[3]/div/div/div/a[4]
-/html/body/form/div[3]/div[2]/div[3]/div[3]/div/div/div/a[5]
-/html/body/form/div[3]/div[2]/div[3]/div[3]/div/div/div/a[6]
-
-
 '''
-
-# for a in range(1, 139):
-#     elem = str(f'//*[@id="link{a}"]"]')
-#     pag = navegador.find_element('xpath', elem).click()
