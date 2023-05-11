@@ -12,11 +12,9 @@ fonte = html.fromstring(response.content)
 site = bs(content, 'html.parser')#o ponto parse converte em html
 #print(site.prettify()) #o ponto prettify serve para estruturar o código igual ao html real do site
 ver = site.findAll('i')#attrs serve para procurar um atributo no html
-ver2 = site.findAll(    )
 #print(ver)
 
 
-#TESTEGIT
 
 for t in range(238, 248):
     nomes = fonte.xpath(f'//*[@id="ctl{t}_lblNome"]/text()')
