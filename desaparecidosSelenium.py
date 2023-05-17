@@ -46,6 +46,7 @@ for a in range(3, 139):
     print("-#-"*7,f"Página([{a}]) Acima",'-*-'*7)
 
 
+
 #criação do arquivo csv
 with open('DB.csv', 'w', newline='') as csvfile:
     writer = csv.writer(csvfile)
