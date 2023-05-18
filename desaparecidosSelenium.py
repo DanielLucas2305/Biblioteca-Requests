@@ -35,24 +35,46 @@ for a in range(1, 3):
     print("-#-"*7,f"Página([{a}]) Abaixo",'-*-'*7)
     print(all)
     print("-#-"*7,f"Página([{a}]) Acima",'-*-'*7)
+    with open('Nomes.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(all)
+
+    csvfile.close()
 
 sleep(3)
 
-for a in range(3, 139):
+for a in range(3, 8):
     segpag = navegador.find_element('xpath', f'//*[@id="link{a}"]').click()
     searchs()
     print("-#-"*7,f"Página([{a}]) Abaixo",'-*-'*7)
     print(all)
     print("-#-"*7,f"Página([{a}]) Acima",'-*-'*7)
+    with open('Nomes.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(all)
 
+    csvfile.close()
 
+sleep(3)
+
+for a in range(8, 139):
+    segpag = navegador.find_element('xpath', f'//*[@id="link{a}"]').click()
+    searchs()
+    print("-#-"*7,f"Página([{a}]) Abaixo",'-*-'*7)
+    print(all)
+    print("-#-"*7,f"Página([{a}]) Acima",'-*-'*7)
+    with open('Nomes.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(all)
+
+    csvfile.close()
 
 #criação do arquivo csv
-with open('DB.csv', 'w', newline='') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerows(all)
+# with open('DB.csv', 'w', newline='') as csvfile:
+#     writer = csv.writer(csvfile)
+#     writer.writerows(all)
 
-csvfile.close()
+# csvfile.close()
 
 
 '''
